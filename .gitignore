@@ -2,3 +2,8 @@
 data/
 *.zip
 *.keras
+*tflite
+content/
+capstone1/*.zip
+capstone1/to_skip.txt
+capstone1/.venv
