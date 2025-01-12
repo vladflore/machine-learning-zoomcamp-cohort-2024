@@ -3,8 +3,8 @@ from tensorflow import keras
 from tensorflow.keras.preprocessing.image import load_img
 from tensorflow.keras.applications.xception import preprocess_input
 
-
-MODEL_NAME = "xception_v4_08_0.977.keras"
+# Use the model obtained as a result of running train.py
+MODEL_NAME = "xception_08_0.977.keras"
 trained_model = keras.models.load_model(MODEL_NAME)
 
 # test_image = "butterfly.jpeg"

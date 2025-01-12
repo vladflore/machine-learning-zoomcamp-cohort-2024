@@ -196,12 +196,65 @@ def create_small_subsets():
     copy_subset_of_images(test_dir, test_dir_small, 0.1)
 
 
+def check_images_sizes():
+    image_sizes = {}
+    dirs = [train_dir, val_dir, test_dir]
+    for dir in dirs:
+        print(dir)
+        animals = os.listdir(dir)
+        for animal in animals:
+            images = os.listdir(os.path.join(dir, animal))
+            for image in images:
+                image_path = os.path.join(dir, animal, image)
+                with Image.open(image_path) as img:
+                    width, height = img.size
+                    image_size = (width, height)
+                    if image_size not in image_sizes:
+                        image_sizes[image_size] = 1
+                    else:
+                        image_sizes[image_size] += 1
+    return image_sizes
+
+
+def plot_images_sizes(images_sizes):
+    sorted_sizes = dict(
+        sorted(images_sizes.items(), key=lambda item: item[1], reverse=True)
+    )
+    top_sizes = dict(list(sorted_sizes.items())[:10])
+    plt.figure(figsize=(10, 6))
+    plt.pie(top_sizes.values(), labels=top_sizes.keys(), autopct="%1.1f%%")
+    plt.title("Top 10 Image Sizes")
+    plt.tight_layout()
+    plt.show()
+
+
+def plot_images_grid(animals_folder):
+    for animal_folder in animals_folder:
+        animal_path = os.path.join(IMAGES_DATASET, animal_folder)
+        if os.path.isdir(animal_path):
+            images = os.listdir(animal_path)
+            random_images = random.sample(images, 18)
+            fig, ax = plt.subplots(3, 6, figsize=(15, 10))
+            fig.suptitle(animal_folder, fontsize=16)
+            for i, image in enumerate(random_images):
+                image_path = os.path.join(animal_path, image)
+                with Image.open(image_path) as img:
+                    row = i // 6
+                    col = i % 6
+                    ax[row, col].imshow(img)
+                    ax[row, col].axis("off")
+            plt.tight_layout()
+            plt.show()
+
+
 if __name__ == "__main__":
     count_images()
+    plot_images_grid(os.listdir(IMAGES_DATASET))
     find_invalid_images()
     image_counts = count_images_per_animal()
     plot_histo(image_counts)
     split_dataset(IMAGES_DATASET, train_dir, val_dir, test_dir)
     check_split()
+    plot_images_sizes(check_images_sizes())
     create_small_subsets()
     print("Done")

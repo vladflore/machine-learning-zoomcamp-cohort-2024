@@ -9,8 +9,8 @@ print(keras.__version__)
 
 ROOT = "content/drive/mydrive/mlzoomcamp/capstone1/animals"
 IMAGES_DATASET = f"{ROOT}/raw-img"
-train_dir_small = f"{ROOT}/small/train"
-val_dir_small = f"{ROOT}/small/val"
+TRAIN_DIR_SMALL = f"{ROOT}/small/train"
+VAL_DIR_SMALL = f"{ROOT}/small/val"
 
 
 def make_model(input_size=150, learning_rate=0.01, size_inner=100, droprate=0.5):
@@ -43,12 +43,12 @@ train_gen = ImageDataGenerator(
     horizontal_flip=True,
 )
 train_ds = train_gen.flow_from_directory(
-    train_dir_small, target_size=(input_size, input_size), batch_size=32
+    TRAIN_DIR_SMALL, target_size=(input_size, input_size), batch_size=32
 )
 
 val_gen = ImageDataGenerator(preprocessing_function=preprocess_input)
 val_ds = val_gen.flow_from_directory(
-    val_dir_small, target_size=(input_size, input_size), batch_size=32, shuffle=False
+    VAL_DIR_SMALL, target_size=(input_size, input_size), batch_size=32, shuffle=False
 )
 
 checkpoint = keras.callbacks.ModelCheckpoint(
