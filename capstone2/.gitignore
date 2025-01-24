@@ -1,0 +1,6 @@
+*.zip
+content/
+/.idea/
+*.keras
+*.tflite
+.venv/

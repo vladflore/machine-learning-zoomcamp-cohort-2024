@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="machine-learning-zoomcamp-cohort-2024">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/bank-additional.zip!/" />
+      <root url="jar://$PROJECT_DIR$/data.zip!/" />
+      <root url="jar://$PROJECT_DIR$/bank.zip!/" />
+      <root url="jar://$PROJECT_DIR$/bank+marketing.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
